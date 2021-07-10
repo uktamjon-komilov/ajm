@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
+    {% load static %}
+    {% load joriy_yol %}
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,17 +11,20 @@
 </head>
 <body>
     <div class="container mt-5">
-        {{request.path}}
         <div class="row">
             <div class="col-4">
                 <div class="list-group">
                     {% for music in musics %}
-                        <a href="/{{music.id}}" class="list-group-item list-group-item-action">{{music.title}}</a>
+                        <a href="/{{music.id}}" class="list-group-item list-group-item-action {% if request|joriy_yol == music.id %}active{% endif %}">{{music.title}}</a>
                     {% endfor %}
                 </div>
             </div>
             <div class="col-8">
-                <h1>Iltimos, bironta musiqani tanlang!</h1>
+                <img src="{% get_media_prefix %}{{music.thumbnail}}" class="img-thumbnail" style="width: 300px;">
+                <audio controls>
+                    <source src="{% get_media_prefix %}{{music.file}}" type="audio/ogg">
+                  Your browser does not support the audio element.
+                </audio>
             </div>
         </div>
     </div>
