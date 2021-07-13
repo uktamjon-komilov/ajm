@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     {% load static %}
-    {% load joriy_yol %}
+    {% load active_link_tags %}
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,7 +15,7 @@
             <div class="col-4">
                 <div class="list-group">
                     {% for music in musics %}
-                        <a href="/{{music.id}}" class="list-group-item list-group-item-action {% if request|joriy_yol == music.id %}active{% endif %}">{{music.title}}</a>
+                        <a href="{% url 'single-music' _id=music.id %}" class="list-group-item list-group-item-action {% active_link 'single-music' _id=music.id  %}">{{music.title}}</a>
                     {% endfor %}
                 </div>
             </div>
